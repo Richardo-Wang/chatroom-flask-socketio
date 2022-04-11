@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user login</title>
+    <script>
+    window.onload = function ()
+    {
+        let oBtn = document.getElementById("bt1");
+        oBtn.onclick = function () {
+            let a = document.forms["userinfo"]["name"].value;
+            if (a == null || a == "") {
+                alert("需要输入用户名");
+                return false;
+            }
+            else {
+                window.open("chatroom.html");
+            }
+        }
+    }
+</script>
+</head>
+<body>
+    <form name="userinfo">
+        username:<input id="name" type="text">
+        <input id="bt1" type="submit" name="提交">
+    </form>
+
+</body>
+
+</html>

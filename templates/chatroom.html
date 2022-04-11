@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chat room</title>
+</head>
+<body>
+         <div class="container">
+           <div id="messagebox"></div>
+             内容： <input id="text" type="text" style="width:300px"/>
+        <button onclick="send()">发送</button>
+        <button >退出聊天室</button>
+        </div>
+</body>
+
+<script src=",socket.io/socket.io.js"></script>
+<script>
+    var socket = io("http://127.0.0.1:5000/");
+    socket.on('connect info', function (data){
+        let msg = {data};
+        let connectInfo = document.createElement('div')
+        connectInfo.innerText = msg;
+        messagebox.appendChild(connectInfo);
+    })
+    socket.on('send msg',function (data) {
+        let msg = null
+        let msgbox = document.createElement('div')
+        msg = {data.user}： {data.message}
+        msgbox.innerHTML = msg
+        messageBox.appendChild(msgbox)
+    })
+    sendMsgBtn.onclick = function () {
+            let inp = document.querySelector('#send-msg-inp')
+            let msg = inp.value
+            let user = document.querySelector('#username').innerHTML
+            inp.value = ''
+            if(msg){
+                socket.emit('send msg', {
+                    user: user,
+                    message: msg,
+                })
+                messageBox.scrollTop = messageBox.scrollHeight
+            }else {
+                alert('消息不能为空')
+            }
+        }
+
+</script>
+</html>
